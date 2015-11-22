@@ -22,9 +22,6 @@ public class DataBar : MonoBehaviour
 
 	public void SetScale(int scaleValue)
 	{
-		//TODO: adjust so that bar is always resting in same location
-		//scale should be between 1 and 3
-		//divide by 10
 		int scaleFactor = scaleValue / 4;
 		gameObject.transform.localScale = new Vector3(1f, scaleFactor, 1f);
 

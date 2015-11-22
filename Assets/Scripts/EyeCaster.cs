@@ -29,11 +29,28 @@ public class EyeCaster : MonoBehaviour
 
 		if(Physics.Raycast(ray, out hit, Mathf.Infinity))
 		{
-			//the prime meridian is aligned with the Z forward, so euler Y rotation = long
-			float longitudeValue = hit.transform.rotation.eulerAngles.y; //subtract 180 from this value to change range from 0 - 360 to -180 - 180
+			//find longitude
+			Vector3 centerToHit = hit.transform.position - hit.point;
+			centerToHit.y = hit.point.y; //ignore all vertical angle components
+			float longAngle = Vector3.Angle(hit.transform.forward, centerToHit);
+			//if point is to the left of the prime meridian, set angle to negative
+			if(hit.transform.rotation.eulerAngles.y > 180)
+			{
+				longAngle *= -1;
+			}
+
+			//find latitude
+			centerToHit = hit.transform.position - hit.point;
+			centerToHit.x = 0; //ignore all horizontal angle components
+			float latAngle = Vector3.Angle (transform.forward, centerToHit);
+			//if point is below the equator, set angle to negative
+			if(hit.point.y < hit.transform.position.y)
+			{
+				latAngle *= -1;
+			}
 
 			//run query wth this lat/long
-			yield return StartCoroutine(entryPoint.GetNumberOfFossils(0, longitudeValue)); //TODO: replace 47 with calculated latitudinal value
+			yield return StartCoroutine(entryPoint.GetNumberOfFossils(latAngle, longAngle)); //TODO: replace 0 with calculated latitudinal value
 
 			//get the cached number of fossils from our data class
 			int numberOfFossilsFound = entryPoint.lastNumberOfFossilsFound;

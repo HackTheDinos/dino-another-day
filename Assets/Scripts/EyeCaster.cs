@@ -12,6 +12,9 @@ public class EyeCaster : MonoBehaviour
 	[SerializeField]
 	private EntryPoint entryPoint = null;
 
+	[SerializeField]
+	private GameObject cursor = null;
+
 	private int dataBarIter = 0;
 
 	void Update()
@@ -19,6 +22,26 @@ public class EyeCaster : MonoBehaviour
 		if(Input.GetMouseButtonDown(0))
 		{
 			StartCoroutine(GetLatLong());
+		}
+
+		Ray ray = new Ray(transform.position, transform.forward);
+		RaycastHit hit;
+		
+		if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+		{
+			if(hit.collider.tag != "Globe")
+			{
+				cursor.transform.position = Vector3.zero;
+				return;
+			}
+			else
+			{
+				cursor.transform.position = hit.point;
+			}
+		}
+		else
+		{
+			cursor.transform.position = Vector3.zero;
 		}
 	}
 
@@ -58,6 +81,10 @@ public class EyeCaster : MonoBehaviour
 			//debug
 			Debug.Log("Number of fossils found: " + numberOfFossilsFound);
 			SetDataBar(numberOfFossilsFound);
+		}
+		else
+		{
+			cursor.transform.position = Vector3.zero;
 		}
 	
 	}

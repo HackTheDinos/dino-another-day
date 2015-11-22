@@ -10,7 +10,7 @@ PlayerSettings:
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: Paleo Viewer
-  productName: paleo-viewer
+  productName: NextDig
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -120,7 +120,7 @@ PlayerSettings:
   iOSLaunchScreenCustomXibPath: 
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 0}
+  androidSplashScreen: {fileID: 2800000, guid: 1142e2c3238ab4ff08ae31f6a97a0353, type: 3}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   AndroidTVCompatibility: 1
@@ -135,7 +135,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 670b906761af84847ba074e30891f7fa, type: 3}
       m_Size: 128
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
